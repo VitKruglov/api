@@ -1,0 +1,15 @@
+Options +FollowSymLinks
+IndexIgnore *
+#RewriteEngine on
+ 
+# Перенаправление с domain.by на domain.by/api
+#RewriteCond %{REQUEST_URI} ^/$
+#RewriteRule ^(.*)$ /api/$1 [R=301]
+ 
+#Если адрес начинается с api/ , то перенаправлять все запросы на index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule (.*)$ index.php
+RewriteRule ^(.+)$ index.php?q=$1 [L,QSA]
+#RewriteRule ^api/(.*)$ /api/index.php
